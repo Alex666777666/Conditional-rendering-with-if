@@ -1,6 +1,7 @@
 import React from 'react'
 import { Component } from 'react'
 import Greeting from './Greeting.jsx'
+import Logger from './Logger.jsx'
 
 class Auth extends Component {
   constructor(props) {
@@ -12,31 +13,22 @@ class Auth extends Component {
   }
 
   onLogin = () => {
-    this.setState({
-      isLoggedIn: true,
-    })
+    this.setState({ isLoggedIn: true })
   }
 
   onLogout = () => {
-    this.setState({
-      isLoggedIn: false,
-    })
+    this.setState({ isLoggedIn: false })
   }
 
   render() {
     return (
       <div className='panel'>
         <Greeting isLoggedIn={this.state.isLoggedIn} />
-
-        {this.state.isLoggedIn ? (
-          <button className='btn logout' onClick={this.onLogout}>
-            Logout
-          </button>
-        ) : (
-          <button className='btn login' onClick={this.onLogin}>
-            Login
-          </button>
-        )}
+        <Logger
+          isLoggedIn={this.state.isLoggedIn}
+          onLogin={this.onLogin}
+          onLogout={this.onLogout}
+        />
       </div>
     )
   }
