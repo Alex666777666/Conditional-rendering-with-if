@@ -1,9 +1,9 @@
 import React from 'react'
-import { Component } from 'react'
 import Greeting from './Greeting.jsx'
-import Logger from './Logger.jsx'
+import Login from './Login.jsx'
+import Logout from './Logout.jsx'
 
-class Auth extends Component {
+class Auth extends React.Component {
   constructor(props) {
     super(props)
 
@@ -13,22 +13,28 @@ class Auth extends Component {
   }
 
   onLogin = () => {
-    this.setState({ isLoggedIn: true })
+    this.setState({
+      isLoggedIn: true,
+    })
   }
 
   onLogout = () => {
-    this.setState({ isLoggedIn: false })
+    this.setState({
+      isLoggedIn: false,
+    })
   }
 
   render() {
     return (
       <div className='panel'>
         <Greeting isLoggedIn={this.state.isLoggedIn} />
-        <Logger
-          isLoggedIn={this.state.isLoggedIn}
-          onLogin={this.onLogin}
-          onLogout={this.onLogout}
-        />
+        <div>
+          {this.state.isLoggedIn ? (
+            <Logout onLogout={this.onLogout} />
+          ) : (
+            <Login onLogin={this.onLogin} />
+          )}
+        </div>
       </div>
     )
   }
